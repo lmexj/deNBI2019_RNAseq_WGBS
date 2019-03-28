@@ -109,6 +109,8 @@ meanSdPlot(matrix_counts_rlog)
 
 # Look at PCA
 plotPCA(dds_log, intgroup = "Treatment")
+## you can also check the values by specifying returnData parameter:
+## plotPCA(dds_log, intgroup = "Treatment",returnData = T)
 plotPCA(dds_rlog, intgroup = "Treatment")
 
 # Look at correlation between samples
@@ -158,6 +160,10 @@ results_actinomycin <- results(
 summary(results_thz)
 summary(results_actinomycin)
 
+# You can convert thees values into a data frame and export it by write.table() on yourself 
+# data.frame(results_thz)
+# data.frame(results_thz)
+
 plotMA(results_thz, ylim = c(-10, 10), alpha = 0.05, main = "THZ")
 abline(h = lfc_lines, col = "turquoise", lwd = 2)
 
@@ -199,6 +205,7 @@ abline(h = lfc_lines, col = "turquoise", lwd = 1)
 
 plotMA(results_actinomycin_lfcs, ylim = c(-10, 11), main = "Actinomycin, w/ LFC shrinkage")
 abline(h = lfc_lines, col = "turquoise", lwd = 1)
+dev.off()
 
 par(mfrow = c(1, 1))
 
@@ -215,5 +222,9 @@ plotMA(results_actinomycin_lfcs, ylim = c(-10, 10), main = "Actinomycin")
 abline(h = lfc_lines, col = "turquoise", lwd = 2)
 points(x = TBXT_actinomycin$baseMean, y = TBXT_actinomycin$log2FoldChange, pch = 16, col = "blue")
 text(x = TBXT_actinomycin$baseMean + 50000, y = TBXT_actinomycin$log2FoldChange, "TBXT")
+dev.off()
 
+# To check particular genes
 plotCounts(dds, gene = "TBXT", intgroup = "Treatment", normalized = TRUE, pch = 16)
+## if you need to check values
+plotCounts(dds, gene = "TBXT", intgroup = "Treatment", normalized = TRUE, pch = 16, returnData = T)
