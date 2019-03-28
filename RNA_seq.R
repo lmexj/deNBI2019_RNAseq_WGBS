@@ -61,6 +61,13 @@ gene_ids_all <- unlist(
     )
 )
 
+# Map Ensembl gene IDs to gene names
+mart <- useMart(
+    biomart = "ensembl",
+    dataset = "hsapiens_gene_ensembl",
+    verbose = TRUE
+    )
+    
 
 annotations <- getBM(
     attributes = c("ensembl_gene_id", "external_gene_name", "gene_biotype"),
